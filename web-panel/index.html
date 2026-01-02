@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gözetim - Ebeveyn Kontrol Paneli</title>
+    <meta name="description" content="Güçlü ve kullanıcı dostu ebeveyn kontrol sistemi">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="screen active">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="logo-section">
+                    <div class="logo-icon">🛡️</div>
+                    <h1>Gözetim</h1>
+                    <p class="tagline">Güvenli Dijital Yaşam</p>
+                </div>
+
+                <form id="loginForm" class="login-form">
+                    <div class="input-group">
+                        <label for="email">E-posta</label>
+                        <input type="email" id="email" placeholder="ornek@email.com" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Şifre</label>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <span>Giriş Yap</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 10H16M16 10L12 6M16 10L12 14" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span>veya</span>
+                </div>
+
+                <button id="registerBtn" class="btn-secondary">
+                    Yeni Hesap Oluştur
+                </button>
+
+                <div class="demo-credentials">
+                    <p>Demo Hesap:</p>
+                    <code>demo@gozetim.com / demo123</code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboardScreen" class="screen">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <div class="logo-icon-small">🛡️</div>
+                <span>Gözetim</span>
+            </div>
+
+            <div class="nav-menu">
+                <button class="nav-item active" data-tab="overview">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M3 10L10 3L17 10M5 8V17H15V8" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span>Genel Bakış</span>
+                </button>
+
+                <button class="nav-item" data-tab="apps">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="3" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2" />
+                        <rect x="11" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2" />
+                        <rect x="3" y="11" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2" />
+                        <rect x="11" y="11" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2" />
+                    </svg>
+                    <span>Uygulamalar</span>
+                </button>
+
+                <button class="nav-item" data-tab="location">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path
+                            d="M10 10C11.1046 10 12 9.10457 12 8C12 6.89543 11.1046 6 10 6C8.89543 6 8 6.89543 8 8C8 9.10457 8.89543 10 10 10Z"
+                            stroke="currentColor" stroke-width="2" />
+                        <path
+                            d="M10 18C10 18 16 13 16 8C16 4.68629 13.3137 2 10 2C6.68629 2 4 4.68629 4 8C4 13 10 18 10 18Z"
+                            stroke="currentColor" stroke-width="2" />
+                    </svg>
+                    <span>Konum</span>
+                </button>
+
+                <button class="nav-item" data-tab="settings">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path
+                            d="M10 12C11.1046 12 12 11.1046 12 10C12 8.89543 11.1046 8 10 8C8.89543 8 8 8.89543 8 10C8 11.1046 8.89543 12 10 12Z"
+                            stroke="currentColor" stroke-width="2" />
+                        <path
+                            d="M16.5 10C16.5 10.3 16.47 10.59 16.43 10.88L18.54 12.53C18.73 12.67 18.78 12.93 18.66 13.15L16.66 16.85C16.54 17.07 16.29 17.15 16.06 17.07L13.61 16.13C13.08 16.53 12.5 16.86 11.87 17.11L11.5 19.7C11.46 19.94 11.25 20.11 11 20.11H7C6.75 20.11 6.54 19.94 6.5 19.7L6.13 17.11C5.5 16.86 4.92 16.53 4.39 16.13L1.94 17.07C1.71 17.15 1.46 17.07 1.34 16.85L-0.66 13.15C-0.78 12.93 -0.73 12.67 -0.54 12.53L1.57 10.88C1.53 10.59 1.5 10.3 1.5 10C1.5 9.7 1.53 9.41 1.57 9.12L-0.54 7.47C-0.73 7.33 -0.78 7.07 -0.66 6.85L1.34 3.15C1.46 2.93 1.71 2.85 1.94 2.93L4.39 3.87C4.92 3.47 5.5 3.14 6.13 2.89L6.5 0.3C6.54 0.06 6.75 -0.11 7 -0.11H11C11.25 -0.11 11.46 0.06 11.5 0.3L11.87 2.89C12.5 3.14 13.08 3.47 13.61 3.87L16.06 2.93C16.29 2.85 16.54 2.93 16.66 3.15L18.66 6.85C18.78 7.07 18.73 7.33 18.54 7.47L16.43 9.12C16.47 9.41 16.5 9.7 16.5 10Z"
+                            stroke="currentColor" stroke-width="2" />
+                    </svg>
+                    <span>Ayarlar</span>
+                </button>
+            </div>
+
+            <div class="nav-actions">
+                <div class="device-status">
+                    <div class="status-indicator online"></div>
+                    <span>Cihaz Çevrimiçi</span>
+                </div>
+                <button id="logoutBtn" class="btn-logout">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path
+                            d="M7 17H4C3.46957 17 2.96086 16.7893 2.58579 16.4142C2.21071 16.0391 2 15.5304 2 15V5C2 4.46957 2.21071 3.96086 2.58579 3.58579C2.96086 3.21071 3.46957 3 4 3H7M13 13L17 9M17 9L13 5M17 9H7"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <main class="dashboard-content">
+            <!-- Overview Tab -->
+            <div id="overviewTab" class="tab-content active">
+                <div class="page-header">
+                    <div>
+                        <h2>Genel Bakış</h2>
+                        <p class="subtitle">Cihaz aktivitesi ve kullanım özeti</p>
+                    </div>
+                    <div class="date-selector">
+                        <button class="date-btn active">Bugün</button>
+                        <button class="date-btn">Bu Hafta</button>
+                        <button class="date-btn">Bu Ay</button>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M12 8V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <p class="stat-label">Ekran Süresi</p>
+                            <h3 class="stat-value" id="screenTime">4s 32d</h3>
+                            <span class="stat-change positive">↓ %23 daha az</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="7" height="7" rx="1" stroke="white" stroke-width="2" />
+                                <rect x="14" y="3" width="7" height="7" rx="1" stroke="white" stroke-width="2" />
+                                <rect x="3" y="14" width="7" height="7" rx="1" stroke="white" stroke-width="2" />
+                                <rect x="14" y="14" width="7" height="7" rx="1" stroke="white" stroke-width="2" />
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <p class="stat-label">Kullanılan Uygulama</p>
+                            <h3 class="stat-value" id="appsUsed">12</h3>
+                            <span class="stat-change neutral">5 engellendi</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M9 11L12 14L22 4M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16"
+                                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <p class="stat-label">Aktif Kurallar</p>
+                            <h3 class="stat-value" id="activeRules">8</h3>
+                            <span class="stat-change positive">Tümü aktif</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                                    stroke="white" stroke-width="2" />
+                                <path d="M12 16V12M12 8H12.01" stroke="white" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <p class="stat-label">Uyarılar</p>
+                            <h3 class="stat-value" id="alerts">3</h3>
+                            <span class="stat-change negative">2 yeni</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-grid">
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <h3>Günlük Kullanım</h3>
+                            <select class="chart-selector">
+                                <option>Son 7 Gün</option>
+                                <option>Son 30 Gün</option>
+                            </select>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="usageChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>En Çok Kullanılan Uygulamalar</h3>
+                            <button class="btn-text">Tümünü Gör</button>
+                        </div>
+                        <div class="app-list" id="topApps">
+                            <!-- Dinamik olarak doldurulacak -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Son Aktiviteler</h3>
+                        <button class="btn-text">Tümünü Gör</button>
+                    </div>
+                    <div class="activity-timeline" id="activityTimeline">
+                        <!-- Dinamik olarak doldurulacak -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apps Tab -->
+            <div id="appsTab" class="tab-content">
+                <div class="page-header">
+                    <div>
+                        <h2>Uygulama Yönetimi</h2>
+                        <p class="subtitle">Uygulamaları engelleyin veya zaman limiti koyun</p>
+                    </div>
+                    <div class="search-box">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path
+                                d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z"
+                                stroke="currentColor" stroke-width="2" />
+                            <path d="M19 19L14.65 14.65" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                        <input type="text" placeholder="Uygulama ara..." id="appSearch">
+                    </div>
+                </div>
+
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">Tümü</button>
+                    <button class="filter-tab" data-filter="blocked">Engellenenler</button>
+                    <button class="filter-tab" data-filter="limited">Sınırlı</button>
+                    <button class="filter-tab" data-filter="allowed">İzin Verilenler</button>
+                </div>
+
+                <div class="apps-grid" id="appsGrid">
+                    <!-- Dinamik olarak doldurulacak -->
+                </div>
+            </div>
+
+            <!-- Location Tab -->
+            <div id="locationTab" class="tab-content">
+                <div class="page-header">
+                    <div>
+                        <h2>Konum Takibi</h2>
+                        <p class="subtitle">Cihazın anlık ve geçmiş konumları</p>
+                    </div>
+                    <button class="btn-primary" id="refreshLocation">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path
+                                d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C11.7244 3 13.3038 3.62125 14.5355 4.64645M14.5355 4.64645V1M14.5355 4.64645H11"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Konumu Yenile</span>
+                    </button>
+                </div>
+
+                <div class="location-grid">
+                    <div class="card map-card">
+                        <div id="map" class="map-container">
+                            <div class="map-placeholder">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                                    <path
+                                        d="M32 32C35.3137 32 38 29.3137 38 26C38 22.6863 35.3137 20 32 20C28.6863 20 26 22.6863 26 26C26 29.3137 28.6863 32 32 32Z"
+                                        stroke="currentColor" stroke-width="3" />
+                                    <path
+                                        d="M32 54C32 54 48 42 48 26C48 15.5066 39.9411 7 32 7C24.0589 7 16 15.5066 16 26C16 42 32 54 32 54Z"
+                                        stroke="currentColor" stroke-width="3" />
+                                </svg>
+                                <p>Harita yükleniyor...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card location-info-card">
+                        <h3>Mevcut Konum</h3>
+                        <div class="location-details">
+                            <div class="location-item">
+                                <span class="location-label">Adres:</span>
+                                <span class="location-value" id="currentAddress">Yükleniyor...</span>
+                            </div>
+                            <div class="location-item">
+                                <span class="location-label">Koordinatlar:</span>
+                                <span class="location-value" id="currentCoords">--, --</span>
+                            </div>
+                            <div class="location-item">
+                                <span class="location-label">Son Güncelleme:</span>
+                                <span class="location-value" id="lastUpdate">--</span>
+                            </div>
+                            <div class="location-item">
+                                <span class="location-label">Doğruluk:</span>
+                                <span class="location-value" id="accuracy">-- metre</span>
+                            </div>
+                        </div>
+
+                        <div class="location-history">
+                            <h4>Konum Geçmişi</h4>
+                            <div id="locationHistory" class="history-list">
+                                <!-- Dinamik olarak doldurulacak -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settingsTab" class="tab-content">
+                <div class="page-header">
+                    <div>
+                        <h2>Ayarlar</h2>
+                        <p class="subtitle">Sistem ve güvenlik ayarları</p>
+                    </div>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="card">
+                        <h3>Genel Ayarlar</h3>
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Bildirimler</h4>
+                                    <p>Önemli olaylar için bildirim al</p>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" id="notifications" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Otomatik Konum Güncellemesi</h4>
+                                    <p>Her 15 dakikada bir konum güncelle</p>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" id="autoLocation" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Uygulama Silme Koruması</h4>
+                                    <p>Uygulama silinirse uyarı gönder</p>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" id="uninstallProtection" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Güvenlik</h3>
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>İki Faktörlü Doğrulama</h4>
+                                    <p>Ekstra güvenlik katmanı</p>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" id="twoFactor">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Şifre Değiştir</h4>
+                                    <p>Hesap şifrenizi güncelleyin</p>
+                                </div>
+                                <button class="btn-secondary">Değiştir</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Cihaz Bilgileri</h3>
+                        <div class="device-info" id="deviceInfo">
+                            <div class="info-row">
+                                <span>Cihaz Adı:</span>
+                                <strong id="deviceName">-</strong>
+                            </div>
+                            <div class="info-row">
+                                <span>Model:</span>
+                                <strong id="deviceModel">-</strong>
+                            </div>
+                            <div class="info-row">
+                                <span>Android Sürümü:</span>
+                                <strong id="androidVersion">-</strong>
+                            </div>
+                            <div class="info-row">
+                                <span>Pil Durumu:</span>
+                                <strong id="batteryLevel">-</strong>
+                            </div>
+                            <div class="info-row">
+                                <span>Uygulama Sürümü:</span>
+                                <strong id="appVersion">-</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card danger-zone">
+                        <h3>Tehlikeli Bölge</h3>
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Cihazı Uzaktan Kilitle</h4>
+                                    <p>Cihazı anında kilitle</p>
+                                </div>
+                                <button class="btn-danger" id="lockDevice">Kilitle</button>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Tüm Verileri Sil</h4>
+                                    <p>Tüm izleme verilerini sil</p>
+                                </div>
+                                <button class="btn-danger" id="clearData">Verileri Sil</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- App Modal -->
+    <div id="appModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalAppName">Uygulama Ayarları</h3>
+                <button class="modal-close">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="app-modal-header">
+                    <div class="app-modal-icon" id="modalAppIcon"></div>
+                    <div>
+                        <h4 id="modalAppPackage"></h4>
+                        <p id="modalAppUsage">Bugün 0 dakika kullanıldı</p>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h4>Durum</h4>
+                    <div class="status-options">
+                        <label class="status-option">
+                            <input type="radio" name="appStatus" value="allowed" checked>
+                            <span class="status-option-content">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path
+                                        d="M7 10L9 12L13 8M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z"
+                                        stroke="currentColor" stroke-width="2" />
+                                </svg>
+                                <span>İzin Ver</span>
+                            </span>
+                        </label>
+                        <label class="status-option">
+                            <input type="radio" name="appStatus" value="limited">
+                            <span class="status-option-content">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path
+                                        d="M10 6V10M10 14H10.01M19 10C19 14.9706 14.9706 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10Z"
+                                        stroke="currentColor" stroke-width="2" />
+                                </svg>
+                                <span>Sınırla</span>
+                            </span>
+                        </label>
+                        <label class="status-option">
+                            <input type="radio" name="appStatus" value="blocked">
+                            <span class="status-option-content">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path
+                                        d="M10 19C14.9706 19 19 14.9706 19 10C19 5.02944 14.9706 1 10 1C5.02944 1 1 5.02944 1 10C1 14.9706 5.02944 19 10 19Z"
+                                        stroke="currentColor" stroke-width="2" />
+                                    <path d="M3 3L17 17" stroke="currentColor" stroke-width="2" />
+                                </svg>
+                                <span>Engelle</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-section" id="timeLimitSection" style="display: none;">
+                    <h4>Günlük Süre Limiti</h4>
+                    <div class="time-limit-input">
+                        <input type="number" id="timeLimitHours" min="0" max="23" value="1" placeholder="Saat">
+                        <span>:</span>
+                        <input type="number" id="timeLimitMinutes" min="0" max="59" value="0" placeholder="Dakika">
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <h4>Kullanım İstatistikleri</h4>
+                    <div class="usage-stats">
+                        <div class="usage-stat">
+                            <span>Bugün:</span>
+                            <strong id="modalUsageToday">0 dk</strong>
+                        </div>
+                        <div class="usage-stat">
+                            <span>Bu Hafta:</span>
+                            <strong id="modalUsageWeek">0 dk</strong>
+                        </div>
+                        <div class="usage-stat">
+                            <span>Bu Ay:</span>
+                            <strong id="modalUsageMonth">0 dk</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary modal-cancel">İptal</button>
+                <button class="btn-primary" id="saveAppSettings">Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>
