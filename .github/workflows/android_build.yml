@@ -18,16 +18,13 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Make Gradle executable
-      run: chmod +x android-app/gradlew || true # Eğer gradlew dosyası yoksa hata vermesin diye
-
     - name: Build with Gradle
       run: |
         cd android-app
-        # Gradle wrapper dosyaları eksik olsa bile gradle init ile oluşturulabilir 
-        # veya yüklü gradle ile wrapper kurulabilir.
-        # En garanti yol:
-        gradle wrapper --gradle-version 8.2
+        # Sistem gradle'ını sadece wrapper üretmek için kullanıyoruz
+        gradle wrapper --gradle-version 8.4
+        # Artık SADECE wrapper (gradlew) üzerinden devam ediyoruz
+        chmod +x gradlew
         ./gradlew assembleDebug --stacktrace --no-daemon
 
     - name: Upload APK
