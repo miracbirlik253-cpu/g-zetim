@@ -3,7 +3,7 @@ name: Android Build
 on:
   push:
     branches: [ "main", "master" ]
-  workflow_dispatch: # Manuel tetikleme için
+  workflow_dispatch:
 
 jobs:
   build:
@@ -16,12 +16,19 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+        cache: gradle
+
+    - name: Make Gradle executable
+      run: chmod +x android-app/gradlew || true # Eğer gradlew dosyası yoksa hata vermesin diye
 
     - name: Build with Gradle
       run: |
         cd android-app
-        # Sistem gradle'ını kullanıyoruz
-        gradle assembleDebug --stacktrace --no-daemon
+        # Gradle wrapper dosyaları eksik olsa bile gradle init ile oluşturulabilir 
+        # veya yüklü gradle ile wrapper kurulabilir.
+        # En garanti yol:
+        gradle wrapper --gradle-version 8.2
+        ./gradlew assembleDebug --stacktrace --no-daemon
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
