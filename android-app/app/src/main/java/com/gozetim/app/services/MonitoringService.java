@@ -152,7 +152,7 @@ public class MonitoringService extends Service {
 
     private void updateAppUsage() {
         // Get app usage data
-        var usageData = appUsageHelper.getAppUsageStats();
+        java.util.Map<String, java.util.Map<String, Object>> usageData = appUsageHelper.getAppUsageStats();
 
         // Send to Supabase
         supabaseHelper.updateAppUsage(usageData);
