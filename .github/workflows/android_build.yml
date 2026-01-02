@@ -16,24 +16,17 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        # Disabling cache during GitHub infrastructure instability
-        cache: '' 
 
-    - name: Setup Gradle 8.4
+    - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
       with:
         gradle-version: 8.4
-        # Disabling cache here as well
-        cache-disabled: true
 
     - name: Build with Gradle
       run: |
         cd android-app
-        # Generate wrapper using the installed gradle
-        gradle wrapper --gradle-version 8.4
-        chmod +x gradlew
-        # Run build with stacktrace for better debugging
-        ./gradlew assembleDebug --stacktrace --no-daemon
+        # Use the gradle version we just set up instead of generating a wrapper
+        gradle assembleDebug --stacktrace --no-daemon
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
