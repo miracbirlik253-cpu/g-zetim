@@ -3,14 +3,11 @@ name: Android Build
 on:
   push:
     branches: [ "main", "master" ]
-  pull_request:
-    branches: [ "main", "master" ]
+  workflow_dispatch: # Manuel tetikleme için
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
 
@@ -20,14 +17,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
-
     - name: Build with Gradle
       run: |
         cd android-app
-        # Gradle wrapper olmadığı için sistemdeki gradle'ı kullanıyoruz
-        gradle clean assembleDebug --no-daemon
+        # Sistem gradle'ını kullanıyoruz
+        gradle assembleDebug --stacktrace --no-daemon
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
