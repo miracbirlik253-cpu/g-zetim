@@ -189,3 +189,4 @@ Sorularınız için: support@gozetim.com
 ---
 
 **Not**: Bu uygulama demo amaçlıdır. Üretim ortamında kullanmadan önce güvenlik testlerinden geçirin.
+# g-zetim
